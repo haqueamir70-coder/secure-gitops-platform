@@ -10,9 +10,8 @@ LATENCY = Histogram("secure_gitops_http_request_duration_seconds", "Request late
 async def metrics_middleware(request, call_next):
     started = perf_counter()
     response = await call_next(request)
-    path = request.url.path
-    REQUESTS.labels(request.method, path, str(response.status_code)).inc()
-    LATENCY.labels(path).observe(perf_counter() - started)
+    REQUESTS.labels(request.method, request.url.path, str(response.status_code)).inc()
+    LATENCY.labels(request.url.path).observe(perf_counter() - started)
     return response
 
 @app.get("/")
