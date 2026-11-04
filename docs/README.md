@@ -76,3 +76,7 @@ GitOps reports drift and reconciles it. For legitimate changes, update Git; for 
 ### 10. Answer
 
 Use health checks, progressive delivery, readiness gates, metrics and automated rollback. Test failure scenarios in a disposable cluster before production.
+
+## Complete zero-to-hero guide
+
+See [ZERO-TO-HERO.md](./ZERO-TO-HERO.md) for the business scenario, architecture walkthrough, tool-by-tool explanations, implementation sequence, practical commands, troubleshooting playbook and additional scenario-based interview questions with answers.
