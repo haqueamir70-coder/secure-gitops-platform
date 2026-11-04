@@ -315,3 +315,8 @@ This project is built for hands-on learning and portfolio demonstration. Suggest
 **Secure delivery is not one scan or one pipeline. It is a repeatable engineering practice.**
 
 </div>
+
+
+## Architecture and interview preparation
+
+See the [architecture diagram and interview questions](docs/README.md) for the repository-specific design walkthrough and technical interview guide.
