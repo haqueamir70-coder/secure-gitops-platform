@@ -1,192 +1,77 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0B1F3A,50:2563EB,100:00C7FF&height=190&section=header&text=Secure+GitOps+Platform&fontSize=32&fontColor=ffffff&animation=fadeIn" alt="Secure GitOps Platform project banner" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:071A2F,45:4338CA,100:06B6D4&height=230&section=header&text=Secure%20GitOps%20Platform&fontSize=36&fontColor=ffffff&animation=fadeIn" width="100%" alt="Secure GitOps Platform"/>
 
-<img src="https://readme-typing-svg.demolab.com/?font=Inter&weight=600&size=16&pause=1600&color=38BDF8&center=true&vCenter=true&width=900&height=36&lines=Secure+GitOps+Platform+%E2%80%A2+Architecture+%E2%80%A2+Automation+%E2%80%A2+Security" alt="Animated project focus line" />
-
-![Kubernetes](https://img.shields.io/badge/Cloud+Native-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white) ![GitOps](https://img.shields.io/badge/Secure+Delivery-EF7B4D?style=for-the-badge) ![Security](https://img.shields.io/badge/DevSecOps-0F766E?style=for-the-badge)
-
-</div>
-
----
-
-<!--
-  Secure GitOps Platform
-  Portfolio README | MD Amirul Haque
--->
-
-<div align="center">
-
-# Secure GitOps Platform
-
-### Ship securely. Observe everything. Recover confidently.
-
-**A cloud-native DevSecOps reference platform combining automated testing, container security, Kubernetes hardening, software supply-chain visibility, and SRE operating practices.**
-
-<br/>
+### Commit to cluster · Policy before runtime · Evidence after release
 
 [![CI](https://github.com/haqueamir70-coder/secure-gitops-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/haqueamir70-coder/secure-gitops-platform/actions/workflows/ci.yml)
-![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)
-![Docker](https://img.shields.io/badge/Container-Docker-2496ED?logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/Orchestration-Kubernetes-326CE5?logo=kubernetes&logoColor=white)
-![Security](https://img.shields.io/badge/Focus-DevSecOps-8B5CF6)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/Container-Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Kubernetes](https://img.shields.io/badge/Runtime-Kubernetes-326CE5?logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+[![License](https://img.shields.io/badge/License-MIT-16A34A?style=flat)](LICENSE)
 
-<br/>
+**A cloud-native engineering reference that combines tested application delivery, container scanning, SBOM generation, Kubernetes hardening and SRE operating practices.**
 
-[Explore the code](https://github.com/haqueamir70-coder/secure-gitops-platform) · [CI pipeline](https://github.com/haqueamir70-coder/secure-gitops-platform/actions) · [Report an issue](https://github.com/haqueamir70-coder/secure-gitops-platform/issues)
+[Architecture](#-platform-architecture) · [Quick start](#-quick-start) · [Security controls](#-security-controls) · [Operations](#-sre-and-operations)
 
 </div>
-
----
 
 ## Executive overview
 
-Secure GitOps Platform is a hands-on portfolio project that demonstrates how an engineering team can move from application code to a tested, scanned, containerized workload with Kubernetes security controls and operational guidance.
+Secure GitOps Platform demonstrates a delivery path from source code to a tested and scanned container artifact, with Kubernetes manifests and operational guidance for a controlled test-cluster rollout. It connects DevOps, DevSecOps, platform engineering and SRE practices in one repository.
 
-It brings together **DevOps, DevSecOps, Platform Engineering, Kubernetes, and Site Reliability Engineering (SRE)** in one understandable repository. The emphasis is not just on getting an application to run, but on making delivery repeatable, reducing avoidable risk, and preparing operators to troubleshoot failures.
+> [!NOTE]
+> The GitHub Actions pipeline has a previously verified successful run covering tests, container build, Trivy scans and SBOM generation. The Kubernetes manifests are a deployment blueprint; a live cluster deployment has not yet been verified. Check the current [Actions history](../../actions) for the latest result.
 
-> **Project status:** The GitHub Actions pipeline has completed successfully for the latest verified run, including tests, container build, Trivy scans, and SBOM generation. Kubernetes manifests and runbooks are included as a deployment blueprint; a live cluster deployment has not yet been verified.
-
-## At a glance
-
-| Area | Implementation |
-|---|---|
-| Application | FastAPI service with health, readiness, and Prometheus metrics endpoints |
-| Quality gates | Python compilation and automated API tests |
-| Containerization | Docker image with a non-root runtime user |
-| Security checks | Trivy filesystem and container-image scans |
-| Supply chain | CycloneDX SBOM generated and uploaded as a workflow artifact |
-| Kubernetes | Deployment, ClusterIP Service, HPA, PDB, namespace security labels, NetworkPolicy |
-| Reliability | Readiness/liveness probes, resource requests/limits, rollout strategy |
-| Operations | Example SLO/error-budget policy and incident runbook |
-| Automation | GitHub Actions on pushes and pull requests to `main` |
-
-## Architecture
+## Platform architecture
 
 ```mermaid
-flowchart TD
-    Dev[Developer] --> PR[Pull Request / Push]
-    PR --> CI[GitHub Actions CI]
-    CI --> Tests[Compile + Automated Tests]
-    Tests --> Build[Build Container Image]
-    Build --> FS[Trivy Filesystem Scan]
-    Build --> IMG[Trivy Image Scan]
-    Build --> SBOM[Generate CycloneDX SBOM]
-    FS --> Gate[Review CI Results]
-    IMG --> Gate
-    SBOM --> Gate
-    Gate --> Artifact[SBOM Artifact]
-    Gate -. after registry configuration .-> Registry[Container Registry]
-    Registry -. deploy to test cluster .-> K8s[Kubernetes Workload]
-    K8s --> Svc[ClusterIP Service]
-    K8s --> Probe[Health + Readiness Probes]
-    K8s --> Metrics[Prometheus Metrics Endpoint]
-    Metrics --> SRE[SLOs + Incident Runbook]
+flowchart TB
+  Dev[Developer] --> PR[Pull request / push]
+  PR --> CI[GitHub Actions]
+  CI --> Tests[Compile + API tests]
+  Tests --> Build[Build container]
+  Build --> Trivy[Trivy filesystem + image scan]
+  Build --> SBOM[Generate CycloneDX SBOM]
+  Trivy --> Review[Review results]
+  SBOM --> Review
+  Review --> Registry[Registry publishing - future gate]
+  Registry --> K8s[Test Kubernetes cluster]
+  K8s --> Workload[Hardened Deployment]
+  Workload --> Metrics[Metrics / health]
+  Metrics --> SRE[Runbooks + SLO review]
 ```
 
-The registry and cluster deployment are **next-stage integration points**, not an assertion that the workflow currently deploys to a cluster.
+Registry publishing and cluster rollout are controlled extension points; the diagram does not claim they are currently automated.
 
-## Engineering capabilities demonstrated
+## Capability map
 
-<details>
-<summary><strong>01 · CI/CD and repeatability</strong></summary>
-
-- Run automated checks consistently on changes to `main` and pull requests.
-- Compile the Python source and execute API tests before building the image.
-- Build a container artifact in the CI runner.
-- Publish the SBOM as a downloadable workflow artifact.
-- Review actual job logs rather than treating a badge as proof by itself.
-
-</details>
-
-<details>
-<summary><strong>02 · Application and container security</strong></summary>
-
-- Run the API as a non-root user inside the container.
-- Keep local virtual environments, Git metadata, and secret-like files out of the Docker build context.
-- Scan the repository filesystem and built image with Trivy.
-- Generate a CycloneDX software bill of materials to improve dependency visibility.
-- Treat scanner output as evidence to triage—not as a blanket guarantee that an image is vulnerability-free.
-
-</details>
-
-<details>
-<summary><strong>03 · Kubernetes workload hardening</strong></summary>
-
-The manifests provide examples of:
-
-- Restricted Pod Security Admission labels at namespace level.
-- A non-root process and `RuntimeDefault` seccomp profile.
-- Read-only root filesystem, disabled privilege escalation, and dropped Linux capabilities.
-- CPU/memory requests and limits.
-- HTTP liveness and readiness probes.
-- Two initial replicas, rolling-update settings, a PodDisruptionBudget, and CPU-based HPA.
-- A NetworkPolicy restricting ingress to selected pods in the same namespace.
-
-**Important:** NetworkPolicy enforcement depends on the cluster's CNI. The example policy may need deliberate exceptions for ingress controllers, monitoring, DNS, or other required traffic. Validate it in a disposable cluster before relying on it.
-
-</details>
-
-<details>
-<summary><strong>04 · SRE and incident readiness</strong></summary>
-
-- Expose request counters and request-latency histograms for Prometheus scraping.
-- Define an illustrative SLI/SLO and error-budget discussion.
-- Document a first-response workflow for unhealthy pods, service endpoint problems, blocked network traffic, and HPA issues.
-- Include cautious rollout rollback commands and post-incident documentation guidance.
-
-The example SLO is a learning target, **not a measured availability result or contractual SLA**.
-
-</details>
-
-## Repository structure
-
-```text
-.
-├── .github/
-│   └── workflows/
-│       └── ci.yml                 # Test, scan, build, and SBOM pipeline
-├── app/
-│   ├── __init__.py
-│   └── main.py                    # FastAPI + Prometheus metrics
-├── docs/
-│   ├── incident-runbook.md        # Troubleshooting and recovery guide
-│   └── slo-and-error-budget.md    # Example SRE policy and PromQL
-├── k8s/
-│   ├── deployment.yaml            # Hardened workload specification
-│   ├── hpa.yaml                   # CPU-based autoscaling example
-│   ├── kustomization.yaml
-│   ├── namespace.yaml             # Restricted Pod Security labels
-│   ├── network-policy.yaml        # Example ingress boundary
-│   ├── pdb.yaml                   # Voluntary disruption budget
-│   └── service.yaml               # Internal ClusterIP service
-├── scripts/
-│   └── validate.sh                # Local validation helper
-├── tests/
-│   └── test_app.py                # API tests
-├── .dockerignore
-├── Dockerfile
-├── requirements.txt
-└── README.md
-```
+| Layer | Included capability |
+|---|---|
+| Application | FastAPI health, readiness and Prometheus metrics endpoints |
+| Quality | Python compilation and automated API tests |
+| Container | Non-root Docker runtime |
+| Vulnerability management | Trivy filesystem and image scans |
+| Supply chain | CycloneDX SBOM generation and workflow artifact upload |
+| Kubernetes | Deployment, Service, HPA, PDB, namespace labels and NetworkPolicy |
+| Reliability | Probes, resource requests/limits, rolling update settings |
+| Operations | Example SLO/error-budget notes and incident runbook |
 
 ## Quick start
 
-### Prerequisites
+### Requirements
 
-- Python 3.12 or newer
-- Git
-- Docker (optional for local container testing)
-- `kubectl` and a test Kubernetes cluster (only for cluster validation)
+- Python 3.12+.
+- Git.
+- Docker for container testing.
+- `kubectl` and a disposable Kubernetes cluster only for cluster validation.
 
-### 1. Clone and run the API
+### Run the API locally
 
 ```bash
 git clone https://github.com/haqueamir70-coder/secure-gitops-platform.git
 cd secure-gitops-platform
-
 python -m venv .venv
 ```
 
@@ -200,7 +85,7 @@ source .venv/bin/activate
 .venv\Scripts\Activate.ps1
 ```
 
-Install dependencies, run tests, and start the API:
+Install, test and start:
 
 ```bash
 python -m pip install -r requirements.txt
@@ -208,7 +93,7 @@ pytest -q
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-In a second terminal, verify the endpoints:
+Verify in a second terminal:
 
 ```bash
 curl -fsS http://127.0.0.1:8000/health
@@ -216,119 +101,96 @@ curl -fsS http://127.0.0.1:8000/ready
 curl -fsS http://127.0.0.1:8000/metrics
 ```
 
-- `/health` — process health endpoint
-- `/ready` — readiness endpoint
-- `/metrics` — Prometheus exposition format
+Open `http://127.0.0.1:8000/docs` for the interactive API documentation.
 
-Interactive API documentation is available at `http://127.0.0.1:8000/docs` while the local server is running.
-
-### 2. Build and run the container
+### Build the container
 
 ```bash
 docker build -t secure-gitops-platform:local .
 docker run --rm -p 8000:8000 secure-gitops-platform:local
 ```
 
-Verify `http://127.0.0.1:8000/health`. The image runs as a non-root user. The container health check is useful for local container status; Kubernetes uses its own HTTP probes.
+## Kubernetes hardening controls
 
-### 3. Render and validate Kubernetes manifests
+The `k8s/` manifests demonstrate:
+
+- Restricted Pod Security Admission namespace labels.
+- Non-root process, read-only root filesystem and disabled privilege escalation.
+- Dropped Linux capabilities and `RuntimeDefault` seccomp profile.
+- CPU/memory requests and limits.
+- Liveness and readiness probes.
+- Two initial replicas, rolling-update settings and PodDisruptionBudget.
+- CPU-based HPA example.
+- NetworkPolicy limiting ingress to selected same-namespace pods.
+
+**CNI dependency:** NetworkPolicy only enforces when the cluster network plugin supports it. Review required ingress-controller, DNS, monitoring and egress flows before applying the sample policy.
+
+## Render and validate manifests
 
 ```bash
 kubectl kustomize k8s
 kubectl apply --dry-run=client -k k8s
 ```
 
-These commands validate rendering and client-side manifest processing; they do not prove that admission policies, CNI networking, metrics-server, or rollout behavior work in a real cluster.
+Client-side dry-run validates manifest processing only. It does not prove admission behavior, CNI enforcement, metrics-server availability or rollout health.
 
-### 4. Deploy to a disposable test cluster
+## Deploy to a disposable cluster
 
-Before deployment:
-
-1. Build the image and push it to a registry you control.
-2. Update `k8s/deployment.yaml` to use the registry image reference.
-3. Configure image-pull access if the registry is private.
-4. Review the NetworkPolicy against your cluster's required traffic.
-5. Confirm metrics-server is available for HPA operation.
-
-Then deploy and inspect:
+1. Build and push the image to a registry accessible by the cluster.
+2. Replace the demonstration image reference in `k8s/deployment.yaml`.
+3. Configure image-pull credentials if the registry is private.
+4. Review NetworkPolicy against actual cluster traffic.
+5. Confirm metrics-server is available for HPA.
+6. Apply and inspect rollout:
 
 ```bash
 kubectl apply -k k8s
 kubectl -n secure-gitops-demo rollout status deployment/secure-gitops-api
 kubectl -n secure-gitops-demo get deploy,pods,svc,hpa,pdb,networkpolicy
-kubectl -n secure-gitops-demo describe deployment secure-gitops-api
 ```
 
-The supplied manifest uses `secure-gitops-platform:local` as a demonstration image name. A remote cluster cannot pull that image unless it exists in a reachable registry or has been loaded into the local cluster runtime.
+The sample image name `secure-gitops-platform:local` is not automatically pullable by a remote cluster. Use a reachable registry reference or load it into the cluster runtime.
 
-## CI pipeline
+## CI and software supply chain
 
-Workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml)  
-Runs: [View GitHub Actions](https://github.com/haqueamir70-coder/secure-gitops-platform/actions)
+Workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
 
-The workflow is intended to:
+The workflow compiles and tests the app, builds the container, runs Trivy filesystem/image checks, generates a CycloneDX SBOM and uploads the SBOM as an artifact. Scanner findings are reported for review; a green job must not be interpreted as proof that no vulnerabilities exist.
 
-1. Check out the repository and configure Python.
-2. Install the pinned direct dependencies.
-3. Compile the application and test modules.
-4. Execute the API test suite.
-5. Build the Docker image.
-6. Run Trivy filesystem and image scans.
-7. Generate a CycloneDX SBOM and upload it as an artifact.
+For a hardened release pipeline, add immutable image digests, provenance, signing, registry publication with least-privilege identity and admission verification.
 
-Review the latest run and its logs for the exact result. Scanner jobs are configured to report findings without automatically failing solely on CRITICAL/HIGH findings; a successful run therefore means the checks completed, **not** that every finding is absent or accepted for production.
-
-## SRE practice
-
-Start with these operational references:
+## SRE and operations
 
 - [SLO and error-budget guide](docs/slo-and-error-budget.md)
 - [Incident runbook](docs/incident-runbook.md)
 
-Example PromQL queries are included in the SLO guide. Confirm the actual metric names and labels from the running `/metrics` endpoint and configure Prometheus scraping before using them for real operational decisions.
+The sample SLO is a learning target, not a measured production SLO or contractual SLA.
+
+## Repository map
+
+```text
+.github/workflows/   CI, security scans and SBOM
+app/                 FastAPI application and metrics
+tests/               API tests
+k8s/                 Hardened Kubernetes manifests
+docs/                SLO policy and incident runbooks
+scripts/             Local validation helper
+Dockerfile           Non-root container image
+```
 
 ## Roadmap
 
-- [x] Build the FastAPI service and health/metrics endpoints
-- [x] Add automated API tests
-- [x] Build the non-root container image in CI
-- [x] Add Trivy filesystem and image scans
-- [x] Generate and upload an SBOM artifact
-- [x] Add Kubernetes hardening examples and SRE documentation
-- [ ] Publish an immutable image to GHCR with least-privilege workflow permissions
-- [ ] Deploy to a disposable Kubernetes cluster and capture rollout evidence
-- [ ] Validate NetworkPolicy behavior and HPA scaling under load
-- [ ] Add image signing/provenance and policy-as-code checks
-- [ ] Add a documented demo with sanitized screenshots and test evidence
+- [x] API health/readiness/metrics endpoints and tests
+- [x] Container build and non-root runtime
+- [x] Trivy filesystem/image scans and SBOM artifact
+- [x] Kubernetes security baseline and SRE documentation
+- [ ] Publish immutable image with least-privilege permissions
+- [ ] Deploy to a disposable cluster and capture rollout evidence
+- [ ] Verify NetworkPolicy and HPA behavior under load
+- [ ] Add image signing, provenance and admission verification
 
-## Security and responsible use
+## Maintainer
 
-- Never commit credentials, access tokens, kubeconfigs, private keys, or confidential employer/customer information.
-- Use a disposable environment for first deployment and load tests.
-- Review dependency and image scan findings before any release.
-- Pin third-party GitHub Actions to full commit SHAs when hardening the workflow for production.
-- Add registry authentication, immutable image references, TLS ingress, monitoring access, and environment-specific configuration before real-world adoption.
-- Do not treat this reference project as production-ready without security review, cluster validation, recovery testing, and operational ownership.
+**MD Amirul Haque** · [GitHub](https://github.com/haqueamir70-coder) · [LinkedIn](https://www.linkedin.com/in/md-amirul-haque/)
 
-## About the author
-
-**MD Amirul Haque**  
-DevOps · DevSecOps · SRE · Azure Cloud · Platform Engineering
-
-- GitHub: [@haqueamir70-coder](https://github.com/haqueamir70-coder)
-- LinkedIn: [MD Amirul Haque](https://www.linkedin.com/in/md-amirul-haque/)
-
-This project is built for hands-on learning and portfolio demonstration. Suggestions and constructive feedback are welcome.
-
----
-
-<div align="center">
-
-**Secure delivery is not one scan or one pipeline. It is a repeatable engineering practice.**
-
-</div>
-
-
-## Architecture and interview preparation
-
-See the [architecture diagram and interview questions](docs/README.md) for the repository-specific design walkthrough and technical interview guide.
+<sub>Secure the artifact. Constrain the workload. Make operations observable.</sub>
