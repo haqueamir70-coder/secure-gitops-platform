@@ -9,7 +9,7 @@
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Docker](https://img.shields.io/badge/Container-Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Kubernetes](https://img.shields.io/badge/Runtime-Kubernetes-326CE5?logo=kubernetes&logoColor=white)](https://kubernetes.io/)
-[![License](https://img.shields.io/badge/License-MIT-16A34A?style=flat)](LICENSE)
+[![Security](https://img.shields.io/badge/Focus-DevSecOps-0F766E?style=flat)](#security-controls)
 
 **A cloud-native engineering reference that combines tested application delivery, container scanning, SBOM generation, Kubernetes hardening and SRE operating practices.**
 
